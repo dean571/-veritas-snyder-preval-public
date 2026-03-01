@@ -1,0 +1,168 @@
+[
+  {
+    "id": "V1",
+    "description": "Valid receipt with canonical JSON",
+    "predicate": {
+      "predicate_id": "123e4567-e89b-12d3-a456-426614174000",
+      "authority_scope": "user:read,transaction:execute",
+      "regime_class": "evolution-domain",
+      "lineage_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "timestamp_ns": 1708371480000000000,
+      "semantic_version": "0.1.0"
+    },
+    "receipt": {
+      "predicate_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "prev_receipt_hash": "7c3f4093f5de367e935d9257c37ea0d0f13196f42e083e098883ad6d301fb5b1",
+      "signature": {
+        "alg": "placeholder",
+        "sig_hex": "placeholder_signature_valid"
+      },
+      "spacetime_anchor": {
+        "timestamp_ns": 1708371480000000000,
+        "drift_tolerance_ns": 5000000000,
+        "nonce_window_id": "nw-0001",
+        "location_proof": "timestamp_location_proof"
+      }
+    },
+    "expected_validation_result": "ALLOW",
+    "failure_reason": null
+  },
+  {
+    "id": "V2",
+    "description": "Tampered field (authority_scope)",
+    "predicate": {
+      "predicate_id": "123e4567-e89b-12d3-a456-426614174000",
+      "authority_scope": "tampered_scope",
+      "regime_class": "evolution-domain",
+      "lineage_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "timestamp_ns": 1708371480000000000,
+      "semantic_version": "0.1.0"
+    },
+    "receipt": {
+      "predicate_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "prev_receipt_hash": "7c3f4093f5de367e935d9257c37ea0d0f13196f42e083e098883ad6d301fb5b1",
+      "signature": {
+        "alg": "placeholder",
+        "sig_hex": "placeholder_signature_valid"
+      },
+      "spacetime_anchor": {
+        "timestamp_ns": 1708371480000000000,
+        "drift_tolerance_ns": 5000000000,
+        "nonce_window_id": "nw-0001",
+        "location_proof": "timestamp_location_proof"
+      }
+    },
+    "expected_validation_result": "BLOCK",
+    "failure_reason": "Hash mismatch — predicate field tampered (authority_scope)"
+  },
+  {
+    "id": "V3",
+    "description": "Mismatched predicate_hash",
+    "predicate": {
+      "predicate_id": "123e4567-e89b-12d3-a456-426614174000",
+      "authority_scope": "user:read,transaction:execute",
+      "regime_class": "evolution-domain",
+      "lineage_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "timestamp_ns": 1708371480000000000,
+      "semantic_version": "0.1.0"
+    },
+    "receipt": {
+      "predicate_hash": "29f24c41b414e3f954669e78c11d35b31b8f52b6b2e5f267b988124ef036422e",
+      "prev_receipt_hash": "7c3f4093f5de367e935d9257c37ea0d0f13196f42e083e098883ad6d301fb5b1",
+      "signature": {
+        "alg": "placeholder",
+        "sig_hex": "placeholder_signature_valid"
+      },
+      "spacetime_anchor": {
+        "timestamp_ns": 1708371480000000000,
+        "drift_tolerance_ns": 5000000000,
+        "nonce_window_id": "nw-0001",
+        "location_proof": "timestamp_location_proof"
+      }
+    },
+    "expected_validation_result": "BLOCK",
+    "failure_reason": "Hash mismatch — receipt predicate_hash does not match computed hash"
+  },
+  {
+    "id": "V4",
+    "description": "Broken lineage (prev_receipt_hash)",
+    "predicate": {
+      "predicate_id": "123e4567-e89b-12d3-a456-426614174000",
+      "authority_scope": "user:read,transaction:execute",
+      "regime_class": "evolution-domain",
+      "lineage_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "timestamp_ns": 1708371480000000000,
+      "semantic_version": "0.1.0"
+    },
+    "receipt": {
+      "predicate_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "prev_receipt_hash": "5cfcee77958ceee4588f78d9950cde2b4bf722b5f5b6bbb5e0467c17de60ea65",
+      "signature": {
+        "alg": "placeholder",
+        "sig_hex": "placeholder_signature_valid"
+      },
+      "spacetime_anchor": {
+        "timestamp_ns": 1708371480000000000,
+        "drift_tolerance_ns": 5000000000,
+        "nonce_window_id": "nw-0001",
+        "location_proof": "timestamp_location_proof"
+      }
+    },
+    "expected_validation_result": "BLOCK",
+    "failure_reason": "Lineage continuity failure — prev_receipt_hash mismatch in chain"
+  },
+  {
+    "id": "V5",
+    "description": "Invalid signature",
+    "predicate": {
+      "predicate_id": "123e4567-e89b-12d3-a456-426614174000",
+      "authority_scope": "user:read,transaction:execute",
+      "regime_class": "evolution-domain",
+      "lineage_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "timestamp_ns": 1708371480000000000,
+      "semantic_version": "0.1.0"
+    },
+    "receipt": {
+      "predicate_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "prev_receipt_hash": "7c3f4093f5de367e935d9257c37ea0d0f13196f42e083e098883ad6d301fb5b1",
+      "signature": {
+        "alg": "placeholder",
+        "sig_hex": "invalid_signature_here"
+      },
+      "spacetime_anchor": {
+        "timestamp_ns": 1708371480000000000,
+        "drift_tolerance_ns": 5000000000,
+        "nonce_window_id": "nw-0001",
+        "location_proof": "timestamp_location_proof"
+      }
+    },
+    "expected_validation_result": "BLOCK",
+    "failure_reason": "Invalid signature — cryptographic verification failure"
+  },
+  {
+    "id": "V6",
+    "description": "Non-canonical serialization (negative control)",
+    "predicate": {
+      "y": 20,
+      "x": 10,
+      "command": "move"
+    },
+    "canonical_hash": "f7a2b3c4d5e6f7890abcde1234567890f7a2b3c4d5e6f7890abcde1234567890",
+    "receipt": {
+      "predicate_hash": "f7a2b3c4d5e6f7890abcde1234567890f7a2b3c4d5e6f7890abcde1234567890",
+      "prev_receipt_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": {
+        "alg": "placeholder",
+        "sig_hex": "deadbeef"
+      },
+      "spacetime_anchor": {
+        "timestamp_ns": 1708371480000000000,
+        "drift_tolerance_ns": 5000000000,
+        "nonce_window_id": "nw-0001",
+        "location_proof": "timestamp_location_proof"
+      }
+    },
+    "expected_validation_result": "BLOCK",
+    "failure_reason": "Hash mismatch — non-canonical serialization"
+  }
+]
