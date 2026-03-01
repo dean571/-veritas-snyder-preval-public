@@ -1,0 +1,7 @@
+File	Description
+2026-03-01_veritas-conformance-report.md	Final Markdown conformance report with corrected canonicalization and explicit stubbed signature.
+veritas-conformance-20260301.json	Machine‑readable JSON report with run metadata as first record.
+test_vectors_v0.1.json	The exact test vectors used for the run (V1–V6).
+conformance_harness.py	Python harness that emits run metadata, bans placeholder tokens and repeated hex patterns, and produces JSONL output.
+MANIFEST.md	Manifest entry for the Interop Lab repository.
+PR1_description.md	Pull request description for trackB/run-metadata-no-placeholder.
