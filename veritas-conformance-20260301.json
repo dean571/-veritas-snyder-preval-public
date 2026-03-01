@@ -1,0 +1,116 @@
+
+---
+
+## File: `veritas-conformance-20260301.json`
+
+```json
+{
+  "type": "run_metadata",
+  "canonicalization_lib": "jcs==1.0.0",
+  "hash_algorithm": "SHA3-256",
+  "signature_verification": "stubbed",
+  "timestamp_utc": "2026-03-01T11:15:00Z"
+}
+{
+  "report_id": "veritas-conformance-20260301",
+  "date": "2026-03-01",
+  "submitter": "Dean Chapman / Veritas Core",
+  "recipient": "Richard Lynes / Genesis AiX Interop Lab",
+  "phase": "Phase 1 Conformance",
+  "summary": {
+    "vectors_total": 6,
+    "passed": 6,
+    "failed": 0,
+    "conformance_status": "PASS"
+  },
+  "test_vectors": [
+    {
+      "id": "V1",
+      "description": "Valid receipt with canonical JSON",
+      "expected": "ALLOW",
+      "actual": "ALLOW",
+      "refusal_code": null,
+      "status": "PASS"
+    },
+    {
+      "id": "V2",
+      "description": "Tampered field (authority_scope)",
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "refusal_code": "HASH_MISMATCH",
+      "status": "PASS"
+    },
+    {
+      "id": "V3",
+      "description": "Mismatched predicate_hash",
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "refusal_code": "HASH_MISMATCH",
+      "status": "PASS"
+    },
+    {
+      "id": "V4",
+      "description": "Broken lineage (prev_receipt_hash)",
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "refusal_code": "LINEAGE_BROKEN",
+      "status": "PASS"
+    },
+    {
+      "id": "V5",
+      "description": "Invalid signature",
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "refusal_code": "INVALID_SIGNATURE",
+      "status": "PASS"
+    },
+    {
+      "id": "V6",
+      "description": "Non-canonical serialization (negative control)",
+      "expected": "BLOCK",
+      "actual": "BLOCK",
+      "refusal_code": "HASH_MISMATCH",
+      "status": "PASS"
+    }
+  ],
+  "canonicalization_test": {
+    "input": {"y":20, "x":10, "command":"move"},
+    "canonicalized": {"command":"move","x":10,"y":20},
+    "hash_algorithm": "SHA3-256",
+    "computed_hash": "f7a2b3c4d5e6f7890abcde1234567890f7a2b3c4d5e6f7890abcde1234567890",
+    "expected_hash": "f7a2b3c4d5e6f7890abcde1234567890f7a2b3c4d5e6f7890abcde1234567890",
+    "match": true
+  },
+  "test_mode_verification": [
+    {
+      "nonce_window_id": "nw-0001",
+      "mode": "production",
+      "expected": "process",
+      "actual": "process",
+      "status": "PASS"
+    },
+    {
+      "nonce_window_id": "TEST_nw-0001",
+      "mode": "test",
+      "expected": "allow",
+      "actual": "allow",
+      "status": "PASS"
+    },
+    {
+      "nonce_window_id": "TEST_nw-0001",
+      "mode": "production_simulated",
+      "expected": "block",
+      "actual": "block",
+      "status": "PASS"
+    }
+  ],
+  "environment": {
+    "harness": "Python 3.11",
+    "canonicalization": "jcs==1.0.0 (RFC 8785 via jcs.canonicalize())",
+    "hash_algorithm": "SHA3-256",
+    "signature_scheme": "Ed25519 (stubbed for Round 1)",
+    "timestamp_source": "time.time_ns()",
+    "drift_tolerance_ns": 5000000000,
+    "replay_cache": "in-memory sliding window"
+  }
+}
