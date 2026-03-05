@@ -1,0 +1,192 @@
+{
+  "schema_version": "ctp-v0.1-fixtures",
+  "package_id": "CTP-MESHHW-ROUND1",
+  "generated_utc": "2026-03-05T00:00:00Z",
+  "vectors": [
+    {
+      "vector_id": "V1",
+      "description": "Missing required signal (PPS unavailable)",
+      "request": {
+        "request_id": "req-v1-0001",
+        "decision_time": "2026-03-05T00:00:00Z",
+        "subject": {
+          "subject_type": "device",
+          "subject_id": "dean571:rail0",
+          "subject_pubkey_id": "pubkey:veritas:rail0"
+        },
+        "action": {
+          "action_type": "verify_before_commit",
+          "action_binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "inputs_jcs": {
+          "opaque_request": {}
+        }
+      },
+      "policy": {
+        "policy_bundle_version": "bundle:round1",
+        "policy_jcs_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "requires_signal": true,
+        "requires_attestation": true
+      },
+      "expected": {
+        "decision": "REFUSE",
+        "reason_code": "REFUSE_SIGNAL_REQUIRED_UNAVAILABLE",
+        "retryable": true
+      }
+    },
+    {
+      "vector_id": "V2",
+      "description": "Invalid attestation signature",
+      "request": {
+        "request_id": "req-v2-0002",
+        "decision_time": "2026-03-05T00:00:00Z",
+        "subject": {
+          "subject_type": "device",
+          "subject_id": "dean571:rail1",
+          "subject_pubkey_id": "pubkey:veritas:rail1"
+        },
+        "action": {
+          "action_type": "verify_before_commit",
+          "action_binding_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "inputs_jcs": {
+          "opaque_request": {}
+        }
+      },
+      "policy": {
+        "policy_bundle_version": "bundle:round1",
+        "policy_jcs_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "requires_signal": false,
+        "requires_attestation": true
+      },
+      "expected": {
+        "decision": "REFUSE",
+        "reason_code": "REFUSE_SIGNATURE_INVALID",
+        "retryable": false
+      }
+    },
+    {
+      "vector_id": "V3",
+      "description": "Invalid policy bundle digest",
+      "request": {
+        "request_id": "req-v3-0003",
+        "decision_time": "2026-03-05T00:00:00Z",
+        "subject": {
+          "subject_type": "device",
+          "subject_id": "dean571:rail2",
+          "subject_pubkey_id": "pubkey:veritas:rail2"
+        },
+        "action": {
+          "action_type": "verify_before_commit",
+          "action_binding_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "inputs_jcs": {
+          "opaque_request": {}
+        }
+      },
+      "policy": {
+        "policy_bundle_version": "bundle:round1",
+        "policy_jcs_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "requires_signal": false,
+        "requires_attestation": false
+      },
+      "expected": {
+        "decision": "REFUSE",
+        "reason_code": "REFUSE_POLICY_BUNDLE_INVALID",
+        "retryable": false
+      }
+    },
+    {
+      "vector_id": "V4",
+      "description": "Missing required evidence fields",
+      "request": {
+        "request_id": "req-v4-0004",
+        "decision_time": "2026-03-05T00:00:00Z",
+        "subject": {
+          "subject_type": "device",
+          "subject_id": "dean571:rail3",
+          "subject_pubkey_id": "pubkey:veritas:rail3"
+        },
+        "action": {
+          "action_type": "verify_before_commit",
+          "action_binding_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+        },
+        "inputs_jcs": {},
+        "policy": {
+          "policy_bundle_version": "bundle:round1",
+          "policy_jcs_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+          "requires_signal": false,
+          "requires_attestation": false
+        }
+      },
+      "expected": {
+        "decision": "REFUSE",
+        "reason_code": "REFUSE_EVIDENCE_MISSING",
+        "retryable": true
+      }
+    },
+    {
+      "vector_id": "V5",
+      "description": "Consent revoked in policy",
+      "request": {
+        "request_id": "req-v5-0005",
+        "decision_time": "2026-03-05T00:00:00Z",
+        "subject": {
+          "subject_type": "device",
+          "subject_id": "dean571:rail4",
+          "subject_pubkey_id": "pubkey:veritas:rail4"
+        },
+        "action": {
+          "action_type": "verify_before_commit",
+          "action_binding_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+        },
+        "inputs_jcs": {
+          "opaque_request": {}
+        }
+      },
+      "policy": {
+        "policy_bundle_version": "bundle:round1",
+        "policy_jcs_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "consent_revoked": true,
+        "requires_signal": false,
+        "requires_attestation": false
+      },
+      "expected": {
+        "decision": "BLOCK",
+        "reason_code": "BLOCK_CONSENT_REVOKED",
+        "retryable": false
+      }
+    },
+    {
+      "vector_id": "V6",
+      "description": "Happy path – all valid",
+      "request": {
+        "request_id": "req-v6-0006",
+        "decision_time": "2026-03-05T00:00:00Z",
+        "subject": {
+          "subject_type": "device",
+          "subject_id": "dean571:rail5",
+          "subject_pubkey_id": "pubkey:veritas:rail5"
+        },
+        "action": {
+          "action_type": "verify_before_commit",
+          "action_binding_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+        },
+        "inputs_jcs": {
+          "opaque_request": {}
+        }
+      },
+      "policy": {
+        "policy_bundle_version": "bundle:round1",
+        "policy_jcs_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "requires_signal": false,
+        "requires_attestation": true
+      },
+      "expected": {
+        "decision": "ALLOW",
+        "reason_code": "ALLOW_OK",
+        "retryable": false
+      }
+    }
+  ]
+}
