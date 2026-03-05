@@ -1,0 +1,9 @@
+# Navigate to the bundle folder
+cd trackB/run-metadata-no-placeholder
+
+# Generate REAL hashes (replaces placeholder values)
+sha256sum * > SHA256SUMS.txt
+
+
+cat SHA256SUMS.txt
+# Should show 6 real hashes (64 hex chars each), NOT "f7a2b3c4..."
