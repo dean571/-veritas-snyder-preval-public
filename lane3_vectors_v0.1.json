@@ -1,0 +1,111 @@
+{
+  "schema_version": "ctp-v0.1-lane3",
+  "package_id": "CTP-LANE3-ROUND1",
+  "generated_utc": "2026-03-07T00:00:00Z",
+  "vectors": [
+    {
+      "vector_id": "L3-V1",
+      "description": "Happy path: agent request leads to ALLOW_OK with full attestation",
+      "request": {
+        "request_id": "l3-v1-0001",
+        "decision_time": "2026-03-07T00:00:00Z",
+        "subject": {
+          "subject_type": "agent",
+          "subject_id": "agent:example",
+          "subject_pubkey_id": "pubkey:agent:1"
+        },
+        "action": {
+          "action_type": "execute",
+          "action_binding_sha256": "a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890"
+        },
+        "inputs_jcs": { "opaque_payload": {} },
+        "policy_binding": {
+          "policy_bundle_version": "bundle:round1",
+          "policy_digest_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      },
+      "expected": {
+        "decision": "ALLOW",
+        "reason_code": "ALLOW_OK"
+      }
+    },
+    {
+      "vector_id": "L3-V2",
+      "description": "Missing evidence: inputs_jcs absent → REFUSE_EVIDENCE_MISSING",
+      "request": {
+        "request_id": "l3-v2-0002",
+        "decision_time": "2026-03-07T00:00:00Z",
+        "subject": {
+          "subject_type": "agent",
+          "subject_id": "agent:example",
+          "subject_pubkey_id": "pubkey:agent:1"
+        },
+        "action": {
+          "action_type": "execute",
+          "action_binding_sha256": "b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1"
+        },
+        "policy_binding": {
+          "policy_bundle_version": "bundle:round1",
+          "policy_digest_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      },
+      "expected": {
+        "decision": "REFUSE",
+        "reason_code": "REFUSE_EVIDENCE_MISSING"
+      }
+    },
+    {
+      "vector_id": "L3-V3",
+      "description": "Consent revoked in policy → BLOCK_CONSENT_REVOKED",
+      "request": {
+        "request_id": "l3-v3-0003",
+        "decision_time": "2026-03-07T00:00:00Z",
+        "subject": {
+          "subject_type": "agent",
+          "subject_id": "agent:example",
+          "subject_pubkey_id": "pubkey:agent:1"
+        },
+        "action": {
+          "action_type": "execute",
+          "action_binding_sha256": "c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2"
+        },
+        "inputs_jcs": { "opaque_payload": {} },
+        "policy_binding": {
+          "policy_bundle_version": "bundle:round1",
+          "policy_digest_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+          "consent_revoked": true
+        }
+      },
+      "expected": {
+        "decision": "BLOCK",
+        "reason_code": "BLOCK_CONSENT_REVOKED"
+      }
+    },
+    {
+      "vector_id": "L3-V4",
+      "description": "Required signal unavailable (PPS missing) → REFUSE_SIGNAL_REQUIRED_UNAVAILABLE",
+      "request": {
+        "request_id": "l3-v4-0004",
+        "decision_time": "2026-03-07T00:00:00Z",
+        "subject": {
+          "subject_type": "agent",
+          "subject_id": "agent:example",
+          "subject_pubkey_id": "pubkey:agent:1"
+        },
+        "action": {
+          "action_type": "execute",
+          "action_binding_sha256": "d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3d4e5f67890a1b2c3"
+        },
+        "inputs_jcs": { "opaque_payload": {} },
+        "policy_binding": {
+          "policy_bundle_version": "bundle:round1",
+          "policy_digest_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+        }
+      },
+      "expected": {
+        "decision": "REFUSE",
+        "reason_code": "REFUSE_SIGNAL_REQUIRED_UNAVAILABLE"
+      }
+    }
+  ]
+}
