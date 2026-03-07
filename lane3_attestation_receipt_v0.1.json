@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Attestation Receipt (Lane 3)",
+  "description": "Receipt returned to agent after enforcement decision. Opaque witness only; no semantic content.",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["ALLOW", "BLOCK", "REFUSE"]
+    },
+    "reason_code": {
+      "type": "string",
+      "description": "Canonical reason code (e.g., ALLOW_OK, BLOCK_CONSENT_REVOKED, REFUSE_EVIDENCE_MISSING)."
+    },
+    "attestation_ref": {
+      "type": ["object", "null"],
+      "properties": {
+        "attestation_id": { "type": "string" },
+        "attestation_digest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "timestamp_ns": { "type": "integer" },
+        "monotonic_counter": { "type": "integer" },
+        "tamper_state_bitmap": { "type": "string" },
+        "pps_health": { "type": "string" },
+        "alg_id": { "type": "string" },
+        "signature_b64": { "type": "string" }
+      },
+      "required": ["attestation_id", "attestation_digest_sha256"]
+    }
+  },
+  "required": ["decision", "reason_code"]
+}

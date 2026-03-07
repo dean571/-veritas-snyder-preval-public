@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Action Request (Lane 3)",
+  "description": "Schema for an agent's action request before enforcement. All fields opaque; no semantic interpretation.",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "description": "Unique identifier for this request (opaque)."
+    },
+    "decision_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of request creation (RFC 3339)."
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "subject_type": { "type": "string" },
+        "subject_id": { "type": "string" },
+        "subject_pubkey_id": { "type": "string" }
+      },
+      "required": ["subject_type", "subject_id"]
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "action_type": { "type": "string" },
+        "action_binding_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "required": ["action_type", "action_binding_sha256"]
+    },
+    "inputs_jcs": {
+      "type": "object",
+      "description": "Opaque input payload that will be canonicalized and hashed."
+    },
+    "policy_binding": {
+      "type": "object",
+      "properties": {
+        "policy_bundle_version": { "type": "string" },
+        "policy_digest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "required": ["policy_bundle_version", "policy_digest_sha256"]
+    }
+  },
+  "required": ["request_id", "decision_time", "subject", "action", "policy_binding"]
+}
